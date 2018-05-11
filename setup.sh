@@ -43,13 +43,13 @@ dialog --infobox "Refreshing Arch Keyring..." 4 40
 pacman --noconfirm -Sy archlinux-keyring >/dev/tty6
 
 dialog --infobox "Getting program list..." 4 40
-curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/packagelist.csv > /tmp/packagelist.csv
+curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/master/packagelist.csv > /tmp/packagelist.csv
 rm /tmp/aur_queue &>/dev/tty6
 count=$(cat /tmp/packagelist.csv | grep -G ",$let," | wc -l)
 n=0
 installProgram() { ( (pacman --noconfirm --needed -S $1 &>/dev/tty6 && echo $1 installed.) || echo $1 >> /tmp/aur_queue) || echo $1 >> /tmp/packages_failed ;}
 
-for x in $(cat /caaarlify/packagelist.csv | grep -G ",$let," | awk -F, {'print $1'})
+for x in $(cat /tmp/packagelist.csv | grep -G ",$let," | awk -F, {'print $1'})
 do
 	n=$((n+1))
 	dialog --title "Package Installation" --infobox "Downloading and installing package $n out of $count: $x...\n\nThis may take a while. You can watch the output on tty6." 8 70
@@ -57,9 +57,9 @@ do
 done
 
 dialog --infobox "Preparing the user script..." 4 40
-curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/sudoers_tmp > /etc/sudoers
+curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/master/sudoers_tmp > /etc/sudoers
 cd /tmp
-curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/setup_user.sh > /tmp/setup_user.sh;
+curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/master/setup_user.sh > /tmp/setup_user.sh;
 sudo -u $name bash /tmp/setup_user.sh
 
 dialog --infobox "Installing \"st\" from source..." 4 40
