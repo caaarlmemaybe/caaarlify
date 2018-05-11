@@ -164,7 +164,7 @@ for_window [class="Spotify"] move to workspace $workspace10
 #source ~/.zshrc
 
 # key-bindings
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec st
 bindsym $mod+q kill
 bindsym Print exec screenshot
 bindsym $mod+space exec rofi -show run -lines 10 -eh 1 -width 30 -bw 0

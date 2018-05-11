@@ -20,5 +20,5 @@ systemctl start NetworkManager
 pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman --noconfirm --needed -S dialog
-setup() { curl -O https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/master/setup.sh  bash setup.sh ;}
+setup() { curl -O https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/master/setup.sh &&  bash setup.sh ;}
 dialog --title "Install caaarlify theme" --yesno "This will install a full featured preconfigured i3 desktop environment"  15 60 && setup

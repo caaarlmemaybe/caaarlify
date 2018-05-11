@@ -32,7 +32,7 @@ done
 
 echo Downloading config files...
 
-git clone https://github.com/caaarlmemaybe/caaarlify.git >/dev/null && rsync -va caaarlify/dotfiles /home/$(whoami) >/dev/null && rm -rf caaarlify >/dev/null
+git clone https://github.com/caaarlmemaybe/caaarlify.git >/dev/null && rsync -va caaarlify/dotfiles/ /home/$(whoami) >/dev/null && rm -rf caaarlify >/dev/null
 
 dialog --infobox "Reseting Pulseaudio..." 4 50
 killall pulseaudio >/dev/null
