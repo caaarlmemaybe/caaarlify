@@ -1,0 +1,180 @@
+# mod
+set $mod Mod4
+
+#colors
+set $bg-color            #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# font
+font pango:System San Francisco Display 10
+
+# drag windows
+floating_modifier $mod
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+d focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+set $workspace1 "1:  Web"
+set $workspace2 "2:  Terminal"
+set $workspace3 "3:  Simstack"
+set $workspace4 "4:  Code"
+set $workspace5 "5:  Work"
+set $workspace6 "6:  Work"
+set $workspace7 "7:  Work"
+set $workspace8 "8:  PDF"
+set $workspace9 "9:  Work"
+#set $workspace8 "8:  Chat"
+#set $workspace9 "9:  Mail"
+set $workspace10 "10:  Music"
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# move to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+bindsym Ctrl+Left workspace prev
+bindsym Ctrl+Right workspace next
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace
+bindsym $mod+Shift+r restart
+
+# exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+	      bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+# no window borders
+hide_edge_borders both
+
+# bar
+bar {
+  	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	position top
+	colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
+}
+
+# sticky window
+bindsym $mod+shift+s sticky toggle
+
+# floating
+for_window [class="qTox"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Skype"] floating enable
+
+# default workspaces
+assign [class="Google-chrome"] $workspace4
+assign [class="Vivaldi-stable"] $workspace1
+assign [class="Evince"] $workspace8
+assign [class="Code"] $workspace4
+assign [class="simstack"] $workspace3
+
+#assign [class="Evolution"] $workspace9
+
+#for_window [class="Franz"] move to workspace $workspace8
+for_window [class="Spotify"] move to workspace $workspace10
+
+#assign [class="qTox"] $workspace9
+
+# workspace default monitors
+#workspace $workspace10 output DVI-I-2
+
+# source files
+#source ~/.zshrc
+
+# key-bindings
+bindsym $mod+Return exec gnome-terminal
+bindsym $mod+q kill
+bindsym Print exec screenshot
+bindsym $mod+space exec rofi -show run -lines 10 -eh 1 -width 30 -bw 0
+
+# startup applications
+exec_always --no-startup-id feh --bg-scale /home/carldegitz/.wp.png
+#exec --no-startup-id spotify --disable-gpu
+#exec --no-startup-id evince
+#exec --no-startup-id jupyter-lab
+#exec --no-startup-id vivaldi
+#exec --no-startup-id $HOME/software/simstack/nanomatch.sh
+#exec --no-startup-id simstack
+#exec --no-startup-id "i3-msg 'workspace \"5:  Work\"; append_layout /home/carl/.i3/vmd-workspace.json'"
