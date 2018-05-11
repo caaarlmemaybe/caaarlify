@@ -78,7 +78,7 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 dialog --infobox "Updating sudoers file..." 4 40
 
-curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/sudoers  > /etc/sudoers
+curl https://raw.githubusercontent.com/caaarlmemaybe/caaarlify/master/sudoers  > /etc/sudoers
 
 dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Carl" 12 80
 clear

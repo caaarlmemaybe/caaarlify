@@ -34,6 +34,9 @@ echo Downloading config files...
 
 git clone https://github.com/caaarlmemaybe/caaarlify.git >/dev/null && rsync -va caaarlify/dotfiles/ /home/$(whoami) >/dev/null && rm -rf caaarlify >/dev/null
 
+localectl set-x11-keymap --no-convert de
+systemctl enable lightdm
+
 dialog --infobox "Reseting Pulseaudio..." 4 50
 killall pulseaudio >/dev/null
 pulseaudio --start >/dev/null
