@@ -1,5 +1,5 @@
 # mod
-set $mod Mod4
+set $mod Mod1
 
 #colors
 set $bg-color            #2f343f
@@ -171,10 +171,4 @@ bindsym $mod+space exec rofi -show run -lines 10 -eh 1 -width 30 -bw 0
 
 # startup applications
 exec_always --no-startup-id feh --bg-scale /home/carldegitz/.wp.png
-#exec --no-startup-id spotify --disable-gpu
-#exec --no-startup-id evince
-#exec --no-startup-id jupyter-lab
-#exec --no-startup-id vivaldi
-#exec --no-startup-id $HOME/software/simstack/nanomatch.sh
-#exec --no-startup-id simstack
-#exec --no-startup-id "i3-msg 'workspace \"5:  Work\"; append_layout /home/carl/.i3/vmd-workspace.json'"
+exec_always --no-stattup-id compton --xrender-sync-fence

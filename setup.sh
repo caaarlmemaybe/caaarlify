@@ -18,22 +18,17 @@ dialog --infobox "Adding user \"$name\"..." 4 50
 useradd -m -g wheel -s /bin/bash $name >/dev/tty6
 echo "$name:$pass1" | chpasswd >/dev/tty6
 
-#cmd=(dialog --separate-output --nocancel  --buildlist "Press <SPACE> to select the packages you want to install. LARBS will install all the packages you put in the right column.
-#
-#Use \"^\" and \"\$\" to move to the left and right columns respectively. Press <ENTER> when done." 22 76 16)
-#options=(X "LaTeX packages" off
-#         L "Libreoffice" off
-#         G "GIMP" off
-#         B "Blender" off
-#	 E "Emacs" off
-#	 F "Fonts for unicode and other languages" off
-#	 T "Transmission torrent client" off
-#	 D "Music visualizers and decoration" off
-#	 P "Pandoc and R/Rmarkdown" off
-#	 )
-#choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+cmd=(dialog --separate-output --nocancel  --buildlist "Press <SPACE> to select the packages you dont want to install. I recommend to leave everything checked though.
 
-#let="\(\|[a-z]\|$(echo $choices | sed -e "s/ /\\\|/g")\)"
+Use \"^\" and \"\$\" to move to the left and right columns respectively. Press <ENTER> when done." 22 76 16)
+options=(G "Essentials" on
+         R "Tools like Filemanager, Browser, etc." on
+         X "LaTeX packages" on
+	 U "Utilities for media, ntfs systems etc" on
+	 )
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+
+let="\(\|[a-z]\|$(echo $choices | sed -e "s/ /\\\|/g")\)"
 
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60 || { clear; exit; }
 
